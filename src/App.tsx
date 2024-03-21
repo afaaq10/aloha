@@ -36,11 +36,11 @@ function App() {
         for (let i = 1; i < 6; i++) {
             let newNumber;
             if (previousNumber >= 0) {
-                // If the previous number is positive, generate a random positive number
-                newNumber = generateRandomNumbers();
+                // If the previous number is positive, generate a random positive or negative number
+                newNumber = Math.random() < 0.5 ? generateRandomNumbers() : -generateRandomNumbers();
             } else {
-                // If the previous number is negative, generate a random number within the range [previousNumber, -1]
-                newNumber = Math.floor(Math.random() * Math.abs(previousNumber - 1)) * -1;
+                // If the previous number is negative, generate a random positive number
+                newNumber = generateRandomNumbers();
             }
             newNumbers.push(newNumber);
             previousNumber = newNumber;
@@ -51,6 +51,7 @@ function App() {
         // Reset the sum
         setSum(null);
     };
+
 
     return (
         <div className='flex items-center justify-center h-screen bg-slate-700'>
