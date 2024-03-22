@@ -5,7 +5,7 @@ const generateRandomNumbers = () => {
     return Math.floor(Math.random() * 100) + 1; // From 1 to 100
 }
 
-function App() {
+const App = () => {
     const [currentDigitIndex, setCurrentDigitIndex] = useState(0);
     const [numbers, setNumbers] = useState<number[]>([0]); // Initialize with 0 as the first digit
     const [sum, setSum] = useState<number | null>(null); // Initialize sum as null until calculated
