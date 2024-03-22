@@ -1,7 +1,7 @@
 import React from 'react';
 
 const generateRandomNumbers = () => {
-    return Math.floor(Math.random() * 100) + 1; // From 1 to 100
+    return Math.floor(Math.random() * 100) + 1;
 }
 
 const App = () => {
