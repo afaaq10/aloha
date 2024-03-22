@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const generateRandomNumbers = () => {
-    // Generate a random number between 1 and 100
     return Math.floor(Math.random() * 100) + 1; // From 1 to 100
 }
 
 const App = () => {
-    const [currentDigitIndex, setCurrentDigitIndex] = useState(0);
-    const [numbers, setNumbers] = useState<number[]>([0]); // Initialize with 0 as the first digit
-    const [sum, setSum] = useState<number | null>(null); // Initialize sum as null until calculated
+    const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);
+    const [numbers, setNumbers] = React.useState<number[]>([0]);
+    const [sum, setSum] = React.useState<number | null>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (currentDigitIndex === 6) {
-            // Calculate the sum after all digits are displayed
             const newSum = numbers.reduce((acc, curr) => acc + curr, 0);
             setSum(newSum);
             return;
         }
 
-        // Display next digit after a delay of 1500ms
         const timeout = setTimeout(() => {
             setCurrentDigitIndex(prevIndex => prevIndex + 1);
         }, 1500);
@@ -27,31 +24,24 @@ const App = () => {
     }, [currentDigitIndex, numbers]);
 
     const startProcess = () => {
-        // Reset current digit index
         setCurrentDigitIndex(0);
 
-        // Generate new random numbers ensuring the first digit is positive
         const newNumbers = [generateRandomNumbers()];
         let previousNumber = newNumbers[0];
         for (let i = 1; i < 6; i++) {
             let newNumber;
             if (previousNumber >= 0) {
-                // If the previous number is positive, generate a random positive or negative number
                 newNumber = Math.random() < 0.5 ? generateRandomNumbers() : -generateRandomNumbers();
             } else {
-                // If the previous number is negative, generate a random positive number
                 newNumber = generateRandomNumbers();
             }
             newNumbers.push(newNumber);
             previousNumber = newNumber;
         }
 
-        // Update the state with new numbers
         setNumbers(newNumbers);
-        // Reset the sum
         setSum(null);
     };
-
 
     return (
         <div className='flex items-center justify-center h-screen bg-slate-700'>
