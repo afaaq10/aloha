@@ -38,7 +38,7 @@ const App = () => {
         setCurrentDigitIndex(0);
         setIsStarted(true);
 
-        const newNumbers = [generateRandomNumbers()]; // Start with a positive number
+        const newNumbers = [generateRandomNumbers()];
         let previousNumber = newNumbers[0];
         for (let i = 1; i < 6; i++) {
             let newNumber;
