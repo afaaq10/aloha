@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/aloha/static/css/main.3f9457f4.css",
+    "main.js": "/aloha/static/js/main.8410a2c5.js",
+    "static/js/453.ed3810f9.chunk.js": "/aloha/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/aloha/index.html",
+    "main.3f9457f4.css.map": "/aloha/static/css/main.3f9457f4.css.map",
+    "main.8410a2c5.js.map": "/aloha/static/js/main.8410a2c5.js.map",
+    "453.ed3810f9.chunk.js.map": "/aloha/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f9457f4.css",
+    "static/js/main.8410a2c5.js"
+  ]
+}
