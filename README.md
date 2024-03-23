@@ -25,5 +25,15 @@ Aloha is a React application for Aloha students that displays a sequence of digi
 
 ## Technologies Used
 - React
+- React hooks
 - TypeScript
 - Tailwind CSS
+
+
+## Contributing
+
+Contributions to ALoha are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or create a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
