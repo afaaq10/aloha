@@ -68,54 +68,65 @@ const App = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen bg-slate-700'>
-            <div className='h-28'>
-                <div className="flex justify-center">
-                    <p className='font-medium text-center text-white text-9xl'>
-                        {numbers[currentDigitIndex]}
-                    </p>
-                </div>
-                {sum !== null && (
-                    <p className='mt-4 text-6xl font-medium text-center text-white'> <span className='text-green-400'>Answer</span> : {sum}</p>
+        <div className='flex flex-col items-center min-h-screen bg-[#0f172a]'>
+            <div className='flex flex-col gap-2 mt-7'>
+                <p className='text-4xl font-medium text-white'>Aloha Rush </p>
+                <p className='text-xl text-center text-white'>by <span className='text-green-200'>Afaaq Majeed</span> </p>
+            </div>
+            <div className='flex items-baseline gap-5 mt-9'>
+                {((!isStarted && sum === null) || sum !== null) && (
+                    <div className="mt-12">
+                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                        <input
+                            id="speedInput"
+                            type="number"
+                            value={speed}
+                            onChange={(e) => setSpeed(parseInt(e.target.value))}
+                            min="100"
+                            max="5000"
+                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+                )}
+                {((!isStarted && sum === null) || sum !== null) && (
+                    <div className="mt-2">
+                        <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
+                        <input
+                            id="digitsInput"
+                            type="number"
+                            value={numberOfDigits}
+                            onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
+                            min="1"
+                            max="10"
+                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
                 )}
             </div>
-            <div className='mt-5'>
-                {(!isStarted || sum !== null) && (
-                    <button className='w-20 px-4 py-2 mt-10 text-black bg-green-400 rounded-xl hover:scale-105' onClick={startProcess}>
-                        Start
-                    </button>
-                )}
+            <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
+                <div>
+                    <div>
+                        <p className='font-medium text-center text-white text-9xl'>
+                            {numbers[currentDigitIndex]}
+                        </p>
+                    </div>
+                    {sum !== null && (
+                        <p className='mt-4 text-5xl font-medium text-center text-white'>
+                            <span className='text-green-400'>Answer</span> : {sum}
+                        </p>
+                    )}
+                </div>
+                <div className='mt-10'>
+                    {(!isStarted || sum !== null) && (
+                        <button className='w-24 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105' onClick={startProcess}>
+                            Start
+                        </button>
+                    )}
+                </div>
             </div>
-            {((!isStarted && sum === null) || sum !== null) && (
-                <div className="mt-5">
-                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
-                    <input
-                        id="speedInput"
-                        type="number"
-                        value={speed}
-                        onChange={(e) => setSpeed(parseInt(e.target.value))}
-                        min="100"
-                        max="5000"
-                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                    />
-                </div>
-            )}
-            {((!isStarted && sum === null) || sum !== null) && (
-                <div className="mt-2">
-                    <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
-                    <input
-                        id="digitsInput"
-                        type="number"
-                        value={numberOfDigits}
-                        onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                        min="1"
-                        max="10"
-                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                    />
-                </div>
-            )}
+            <footer className='py-4 text-sm text-white'>&copy; Afaaq Majeed</footer>
         </div>
     );
-}
 
+}
 export default App;
