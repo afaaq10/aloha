@@ -127,6 +127,5 @@ const App = () => {
             <footer className='py-4 text-sm text-white'>&copy; Afaaq Majeed</footer>
         </div>
     );
-
 }
 export default App;
