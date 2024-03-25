@@ -8,9 +8,16 @@
 
 import React from 'react';
 
-const generateRandomNumbers = () => {
-    return Math.floor(Math.random() * 100) + 1;
+// const generateRandomNumbers = () => {
+//     return Math.floor(Math.random() * 100) + 1;
+// }
+
+const generateRandomNumbers = (numberOfDigits: number) => {
+    const min = Math.pow(10, numberOfDigits - 1); // Minimum value based on numberOfDigits (e.g., 10, 100, 1000)
+    const max = Math.pow(10, numberOfDigits) - 1; // Maximum value based on numberOfDigits (e.g., 99, 999, 9999)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 
 const App = () => {
     const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);
@@ -19,6 +26,8 @@ const App = () => {
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
     const [speed, setSpeed] = React.useState<number>(1500);
     const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
+    const [numberOfDigits, setNumberOfDigits] = React.useState<number>(1);
+
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
@@ -40,14 +49,14 @@ const App = () => {
         setCurrentDigitIndex(0);
         setIsStarted(true);
 
-        const newNumbers = [generateRandomNumbers()];
+        const newNumbers = [generateRandomNumbers(numberOfDigits)];
         let previousNumber = newNumbers[0];
 
         for (let i = 1; i < numberOfRows; i++) {
             let newNumber;
 
             if (previousNumber >= 0) {
-                newNumber = generateRandomNumbers();
+                newNumber = generateRandomNumbers(numberOfDigits);
             } else {
                 newNumber = Math.floor(Math.random() * (Math.abs(previousNumber) - 1)) + Math.abs(previousNumber) + 1;
             }
@@ -90,12 +99,26 @@ const App = () => {
                 )}
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Number of Rows:</label>
+                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
                         <input
-                            id="digitsInput"
+                            id="rowsInput"
                             type="number"
                             value={numberOfRows}
                             onChange={(e) => setNumberOfRows(parseInt(e.target.value))}
+                            min="1"
+                            max="10"
+                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                        />
+                    </div>
+                )}
+                {((!isStarted && sum === null) || sum !== null) && (
+                    <div className="mt-2">
+                        <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
+                        <input
+                            id="digitsInput"
+                            type="number"
+                            value={numberOfDigits}
+                            onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
                             min="1"
                             max="10"
                             className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
