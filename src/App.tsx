@@ -14,10 +14,6 @@ const App = () => {
 
     const [selectedOperation, setSelectedOperation] = React.useState('');
 
-    const handleBackToHome = () => {
-        setSelectedOperation('');
-    };
-
     return (
         <div className='flex flex-col items-center min-h-screen bg-[#0f172a]'>
             <div className='flex flex-col gap-2 mt-7'>
@@ -26,9 +22,6 @@ const App = () => {
             </div>
             {selectedOperation ? (
                 <>
-                    <div className="absolute top-0 left-0 mt-4 ml-4">
-                        <button onClick={handleBackToHome} className="text-white">Back to Home</button>
-                    </div>
                     {selectedOperation === 'Add/Subtract' && <AddSub />}
                     {selectedOperation === 'Multiplication' && <Multiplication />}
                 </>
