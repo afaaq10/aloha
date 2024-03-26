@@ -17,11 +17,11 @@ const generateRandomNumbers = (numberOfDigits: number) => {
 const App = () => {
     const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);
     const [numbers, setNumbers] = React.useState<number[]>([0]);
-    const [sum, setSum] = React.useState<number | null>(null);
-    const [isStarted, setIsStarted] = React.useState<boolean>(false);
-    const [speed, setSpeed] = React.useState<number>(1500);
-    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
     const [numberOfDigits, setNumberOfDigits] = React.useState<number>(1);
+    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
+    const [sum, setSum] = React.useState<number | null>(null);
+    const [speed, setSpeed] = React.useState<number>(1500);
+    const [isStarted, setIsStarted] = React.useState<boolean>(false);
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
