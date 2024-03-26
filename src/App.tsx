@@ -9,6 +9,10 @@
 import React from 'react';
 import AddSub from './views/AddSub';
 import Multiplication from './views/Multiplication';
+import Division from './views/Division';
+import Decimal from './views/Decimal';
+import Square from './views/Square';
+import SquareRoot from './views/SquareRoot';
 
 const App = () => {
 
@@ -24,6 +28,10 @@ const App = () => {
                 <>
                     {selectedOperation === 'Add/Subtract' && <AddSub />}
                     {selectedOperation === 'Multiplication' && <Multiplication />}
+                    {selectedOperation === 'Division' && <Division />}
+                    {selectedOperation === 'Decimal' && <Decimal />}
+                    {selectedOperation === 'Square' && <Square />}
+                    {selectedOperation === 'SquareRoot' && <SquareRoot />}
                 </>
             ) : (
                 <div className='flex flex-col mt-24 gap-14'>
@@ -39,7 +47,7 @@ const App = () => {
 
                     <div className="flex gap-16">
                         <button onClick={() => setSelectedOperation('Square')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Square</button>
-                        <button onClick={() => setSelectedOperation('Squareroot')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Square root</button>
+                        <button onClick={() => setSelectedOperation('SquareRoot')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Square root</button>
                     </div>
                 </div>
             )}
