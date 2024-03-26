@@ -7,67 +7,15 @@
  */
 
 import React from 'react';
-
-const generateRandomNumbers = (numberOfDigits: number) => {
-    const min = Math.pow(10, numberOfDigits - 1);
-    const max = Math.pow(10, numberOfDigits) - 1;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import AddSub from './views/AddSub';
+import Multiplication from './views/Multiplication';
 
 const App = () => {
-    const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);
-    const [numbers, setNumbers] = React.useState<number[]>([0]);
-    const [numberOfDigits, setNumberOfDigits] = React.useState<number>(1);
-    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
-    const [sum, setSum] = React.useState<number | null>(null);
-    const [speed, setSpeed] = React.useState<number>(1500);
-    const [isStarted, setIsStarted] = React.useState<boolean>(false);
 
-    React.useEffect(() => {
-        if (currentDigitIndex === numberOfRows) {
-            const newSum = numbers.reduce((acc, curr) => acc + curr, 0);
-            setSum(newSum);
-            return;
-        }
+    const [selectedOperation, setSelectedOperation] = React.useState('');
 
-        if (isStarted && currentDigitIndex < numberOfRows) {
-            const timeout = setTimeout(() => {
-                setCurrentDigitIndex(prevIndex => prevIndex + 1);
-            }, speed);
-
-            return () => clearTimeout(timeout);
-        }
-    }, [currentDigitIndex, isStarted, numbers, speed, numberOfRows]);
-
-    const startProcess = () => {
-        setCurrentDigitIndex(0);
-        setIsStarted(true);
-
-        const newNumbers = [generateRandomNumbers(numberOfDigits)];
-        let previousNumber = newNumbers[0];
-
-        for (let i = 1; i < numberOfRows; i++) {
-            let newNumber;
-
-            if (previousNumber >= 0) {
-                newNumber = generateRandomNumbers(numberOfDigits);
-            } else {
-                newNumber = Math.floor(Math.random() * (Math.abs(previousNumber) - 1)) + Math.abs(previousNumber) + 1;
-            }
-
-            newNumber = Math.random() < 0.5 ? newNumber : -newNumber;
-
-            while (previousNumber + newNumber < 0) {
-                newNumber = Math.floor(Math.random() * (Math.abs(previousNumber) - 1)) + Math.abs(previousNumber) + 1;
-                newNumber = Math.random() < 0.5 ? newNumber : -newNumber;
-            }
-
-            newNumbers.push(newNumber);
-            previousNumber = newNumber;
-        }
-
-        setNumbers(newNumbers);
-        setSum(null);
+    const handleBackToHome = () => {
+        setSelectedOperation('');
     };
 
     return (
@@ -76,73 +24,36 @@ const App = () => {
                 <p className='text-4xl font-medium text-white'>Aloha Rush </p>
                 <p className='text-xl text-center text-white'>by <span className='text-green-200'>Afaaq Majeed</span> </p>
             </div>
-            <div className='flex items-baseline gap-5 mt-9'>
-                {((!isStarted && sum === null) || sum !== null) && (
-                    <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
-                        <input
-                            id="speedInput"
-                            type="number"
-                            value={speed}
-                            onChange={(e) => setSpeed(parseInt(e.target.value))}
-                            min="100"
-                            max="5000"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
+            {selectedOperation ? (
+                <>
+                    <div className="absolute top-0 left-0 mt-4 ml-4">
+                        <button onClick={handleBackToHome} className="text-white">Back to Home</button>
                     </div>
-                )}
-                {((!isStarted && sum === null) || sum !== null) && (
-                    <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
-                        <input
-                            id="rowsInput"
-                            type="number"
-                            value={numberOfRows}
-                            onChange={(e) => setNumberOfRows(parseInt(e.target.value))}
-                            min="1"
-                            max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
+                    {selectedOperation === 'Add/Subtract' && <AddSub />}
+                    {selectedOperation === 'Multiplication' && <Multiplication />}
+                </>
+            ) : (
+                <div className='flex flex-col mt-24 gap-14'>
+                    <div className="flex gap-16">
+                        <button onClick={() => setSelectedOperation('Add/Subtract')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Add/Subtract</button>
+                        <button onClick={() => setSelectedOperation('Multiplication')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Multiplication</button>
                     </div>
-                )}
-                {((!isStarted && sum === null) || sum !== null) && (
-                    <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
-                        <input
-                            id="digitsInput"
-                            type="number"
-                            value={numberOfDigits}
-                            onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                            min="1"
-                            max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
+
+                    <div className="flex gap-16">
+                        <button onClick={() => setSelectedOperation('Division')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Division</button>
+                        <button onClick={() => setSelectedOperation('Decimal')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Decimal</button>
                     </div>
-                )}
-            </div>
-            <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
-                <div>
-                    <div>
-                        <p className='font-medium text-center text-white text-9xl'>
-                            {numbers[currentDigitIndex]}
-                        </p>
+
+                    <div className="flex gap-16">
+                        <button onClick={() => setSelectedOperation('Square')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Square</button>
+                        <button onClick={() => setSelectedOperation('Squareroot')} className='w-40 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105'>Square root</button>
                     </div>
-                    {sum !== null && (
-                        <p className='mt-4 text-5xl font-medium text-center text-white'>
-                            <span className='text-green-400'>Answer</span> : {sum}
-                        </p>
-                    )}
                 </div>
-                <div className='mt-10'>
-                    {(!isStarted || sum !== null) && (
-                        <button className='w-24 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105' onClick={startProcess}>
-                            Start
-                        </button>
-                    )}
-                </div>
-            </div>
+            )}
+            <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}> </div>
             <footer className='py-4 text-sm text-white'>&copy; Afaaq Majeed</footer>
         </div>
     );
-}
+};
+
 export default App;
