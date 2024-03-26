@@ -8,16 +8,11 @@
 
 import React from 'react';
 
-// const generateRandomNumbers = () => {
-//     return Math.floor(Math.random() * 100) + 1;
-// }
-
 const generateRandomNumbers = (numberOfDigits: number) => {
-    const min = Math.pow(10, numberOfDigits - 1); // Minimum value based on numberOfDigits (e.g., 10, 100, 1000)
-    const max = Math.pow(10, numberOfDigits) - 1; // Maximum value based on numberOfDigits (e.g., 99, 999, 9999)
+    const min = Math.pow(10, numberOfDigits - 1);
+    const max = Math.pow(10, numberOfDigits) - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 const App = () => {
     const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);
@@ -27,7 +22,6 @@ const App = () => {
     const [speed, setSpeed] = React.useState<number>(1500);
     const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
     const [numberOfDigits, setNumberOfDigits] = React.useState<number>(1);
-
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
