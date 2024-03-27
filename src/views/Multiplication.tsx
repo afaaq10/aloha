@@ -12,13 +12,13 @@ import { Icon } from '@iconify/react';
 const generateRandomNumbers = (multiplierDigits: number, multiplicandDigits: number) => {
     const multiplier = Math.floor(Math.random() * (Math.pow(10, multiplierDigits) - Math.pow(10, multiplierDigits - 1))) + Math.pow(10, multiplierDigits - 1);
     const multiplicand = Math.floor(Math.random() * (Math.pow(10, multiplicandDigits) - 1)) + 1;
-    return `${multiplier} * ${multiplicand}`; // Return the question in the format "multiplier * multiplicand"
+    return `${multiplier} * ${multiplicand}`;
 }
 
 const Multiplication = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState<string[]>([]);
-    const [numberOfDigits, setNumberOfDigits] = useState<number>(21); // Initial value set to 2*1
+    const [numberOfDigits, setNumberOfDigits] = useState<number>(21);
     const [numberOfRows, setNumberOfRows] = useState<number>(6);
     const [answers, setAnswers] = useState<number[]>([]);
     const [speed, setSpeed] = useState<number>(1500);
@@ -40,18 +40,18 @@ const Multiplication = () => {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
 
-            const multiplierDigits = Math.floor(numberOfDigits / 10); // Extract the first digit
-            const multiplicandDigits = numberOfDigits % 10; // Extract the second digit
+            const multiplierDigits = Math.floor(numberOfDigits / 10);
+            const multiplicandDigits = numberOfDigits % 10;
 
             for (let i = 0; i < numberOfRows; i++) {
                 let question;
                 do {
                     question = generateRandomNumbers(multiplierDigits, multiplicandDigits);
-                } while (question.match(/^\d\*\d$/)); // Exclude cases like 1*1
+                } while (question.match(/^\d\*\d$/));
 
                 const [multiplier, multiplicand] = question.split(' * ').map(Number);
                 newQuestions.push(question);
-                newAnswers.push(multiplier * multiplicand); // Calculate the answer for each question
+                newAnswers.push(multiplier * multiplicand);
             }
 
             setQuestions(newQuestions);
