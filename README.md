@@ -1,4 +1,5 @@
-![image](https://github.com/afaaq10/aloha/assets/87464681/ee6e152e-fdb0-4aed-9632-8fad29921069)
+![image](https://github.com/afaaq10/aloha/assets/87464681/1f10a628-f249-4975-9cca-a54dc95df7ff)
+
 
 
 
