@@ -24,6 +24,8 @@ const Multiplication = () => {
     const [speed, setSpeed] = useState<number>(1500);
     const [isStarted, setIsStarted] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showStartButton, setShowStartButton] = useState<boolean>(true);
+    const [showAnswerButton, setShowAnswerButton] = useState<boolean>(false);
 
     useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
@@ -63,13 +65,15 @@ const Multiplication = () => {
         setShowModal(false);
     };
 
-    const handleModalOpen = () => {
-        setShowModal(true);
-    };
-
     const handleStart = () => {
         setCurrentQuestionIndex(0);
         setIsStarted(true);
+        setShowStartButton(false);
+        setShowAnswerButton(false);
+    };
+
+    const handleShowAnswers = () => {
+        setShowModal(true);
     };
 
     return (
@@ -136,24 +140,29 @@ const Multiplication = () => {
                 )}
                 {currentQuestionIndex === numberOfRows && (
                     <div className='mt-10'>
-                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-300 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleModalOpen}>
-                            Show Answers
-                        </button>
+                        {!showAnswerButton && (
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-300 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleShowAnswers}>
+                                Show Answers
+                            </button>
+                        )}
                     </div>
                 )}
-                {!isStarted && currentQuestionIndex === 0 && (
+                {!isStarted && currentQuestionIndex === 0 && showStartButton && (
                     <div className='mt-10'>
                         <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={handleStart}>
                             Start
                         </button>
                     </div>
                 )}
-                {isStarted && currentQuestionIndex === numberOfRows && (
-                    <div className='mt-10'>
 
-                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
-                            Start again
-                        </button>
+                {currentQuestionIndex === numberOfRows && <p className='mt-4 font-thin text-gray-400'>OR</p>}
+                {isStarted && currentQuestionIndex === numberOfRows && (
+                    <div className='mt-7'>
+                        {!showStartButton && (
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
+                                Start again
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
@@ -176,3 +185,6 @@ const Multiplication = () => {
 };
 
 export default Multiplication;
+
+
+

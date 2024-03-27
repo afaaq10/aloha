@@ -149,23 +149,22 @@ const Division = () => {
                         </button>
                     </div>
                 )}
+                {currentQuestionIndex === numberOfRows && <p className='mt-4 font-thin text-gray-400'>OR</p>}
                 {isStarted && currentQuestionIndex === numberOfRows && (
-                    <div className='mt-10'>
-
+                    <div className='mt-7'>
                         <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
                             Start again
                         </button>
                     </div>
                 )}
             </div>
-
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gray-800 bg-opacity-50">
                     <div className="p-10 bg-white rounded-lg">
                         <h2 className="mb-4 text-2xl font-semibold text-center">Answers</h2>
                         <div className="overflow-y-auto text-center max-h-80">
                             {answers.map((answer, index) => (
-                                <p key={index} className="p-3 text-xl">{questions[index]} = {answer}</p>
+                                <p key={index} className="p-3 text-xl">{questions[index]} = {answer?.toFixed(2)}</p>
                             ))}
                         </div>
                         <button className="block px-12 py-2 mx-auto mt-4 text-white rounded-lg bg-gradient-to-br from-gray-400 to-gray-400" onClick={handleModalClose}>Close</button>
