@@ -45,7 +45,7 @@ const App = () => {
                     {selectedOperation === 'SquareRoot' && <SquareRoot />}
                 </>
             ) : (
-                <div className='flex flex-col mt-24 gap-14'>
+                <div className='flex flex-col gap-16 mt-24'>
                     <div className="flex gap-16">
                         <OperationCard operationName="Addition/Subtraction" onClick={() => setSelectedOperation('Addition/Subtraction')} />
                         <OperationCard operationName="Multiplication" onClick={() => setSelectedOperation('Multiplication')} />
