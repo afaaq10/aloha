@@ -23,11 +23,14 @@ const AddSub = () => {
     const [sum, setSum] = React.useState<number | null>(null);
     const [speed, setSpeed] = React.useState<number>(1500);
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
+    const [showAnswer, setShowAnswer] = React.useState<boolean>(false);
+    const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
             const newSum = numbers.reduce((acc, curr) => acc + curr, 0);
             setSum(newSum);
+            setShowAnswerButton(true);
             return;
         }
 
@@ -69,6 +72,13 @@ const AddSub = () => {
 
         setNumbers(newNumbers);
         setSum(null);
+        setShowAnswer(false); // Set showAnswer to false initially
+        setShowAnswerButton(false);
+    };
+
+    const handleShowAnswer = () => {
+        setShowAnswer(true);
+        setShowAnswerButton(false);
     };
 
     return (
@@ -127,14 +137,21 @@ const AddSub = () => {
                             {numbers[currentDigitIndex]}
                         </p>
                     </div>
-                    {sum !== null && (
+                    {showAnswer && sum !== null && (
                         <p className='mt-4 text-5xl font-medium text-center text-white'>
                             <span className='text-green-400'>Answer</span> : {sum}
                         </p>
                     )}
                 </div>
                 <div className='mt-10'>
-                    {(!isStarted || sum !== null) && (
+                    {isStarted && sum !== null && showAnswerButton && (
+                        <button className='w-32 px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={handleShowAnswer}>
+                            Show Answer
+                        </button>
+                    )}
+                </div>
+                <div className='mt-10'>
+                    {(!isStarted || sum !== null) && !showAnswerButton && (
                         <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={startProcess}>
                             Start
                         </button>
@@ -144,4 +161,5 @@ const AddSub = () => {
         </div>
     );
 }
+
 export default AddSub;
