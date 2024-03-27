@@ -136,14 +136,14 @@ const Multiplication = () => {
                 )}
                 {currentQuestionIndex === numberOfRows && (
                     <div className='mt-10'>
-                        <button className='px-4 py-3 text-black bg-green-200 w-36 rounded-xl hover:scale-105' onClick={handleModalOpen}>
+                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-300 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleModalOpen}>
                             Show Answers
                         </button>
                     </div>
                 )}
                 {!isStarted && currentQuestionIndex === 0 && (
                     <div className='mt-10'>
-                        <button className='w-24 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105' onClick={handleStart}>
+                        <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={handleStart}>
                             Start
                         </button>
                     </div>
@@ -151,7 +151,7 @@ const Multiplication = () => {
                 {isStarted && currentQuestionIndex === numberOfRows && (
                     <div className='mt-10'>
 
-                        <button className='px-4 py-3 text-black bg-green-400 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
+                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
                             Start again
                         </button>
                     </div>
@@ -166,10 +166,11 @@ const Multiplication = () => {
                                 <p key={index} className="p-3 text-xl">{questions[index]} = {answer}</p>
                             ))}
                         </div>
-                        <button className="px-12 py-2 mt-4 text-white bg-green-400 rounded-lg" onClick={handleModalClose}>Close</button>
+                        <button className="block px-12 py-2 mx-auto mt-4 text-white rounded-lg bg-gradient-to-br from-gray-400 to-gray-400" onClick={handleModalClose}>Close</button>
                     </div>
                 </div>
             )}
+
         </div>
     );
 };

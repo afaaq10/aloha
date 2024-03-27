@@ -135,7 +135,7 @@ const AddSub = () => {
                 </div>
                 <div className='mt-10'>
                     {(!isStarted || sum !== null) && (
-                        <button className='w-24 px-4 py-2 text-black bg-green-400 rounded-xl hover:scale-105' onClick={startProcess}>
+                        <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={startProcess}>
                             Start
                         </button>
                     )}
