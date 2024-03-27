@@ -115,11 +115,11 @@ const Multiplication = () => {
                             onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
                             className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                         >
-                            <option value={21}>2*1</option>
-                            <option value={31}>3*1</option>
-                            <option value={41}>4*1</option>
-                            <option value={22}>2*2</option>
-                            <option value={32}>3*2</option>
+                            <option value={21}>2&times;1</option>
+                            <option value={31}>3&times;1</option>
+                            <option value={41}>4&times;1</option>
+                            <option value={22}>2&times;2</option>
+                            <option value={32}>3&times;2</option>
                         </select>
                     </div>
                 )}
@@ -129,7 +129,7 @@ const Multiplication = () => {
                     <div>
                         <div>
                             <p className='font-medium text-center text-white text-9xl'>
-                                {questions[currentQuestionIndex]}
+                                {questions[currentQuestionIndex]?.replace('*', 'x')}
                             </p>
                         </div>
                     </div>
