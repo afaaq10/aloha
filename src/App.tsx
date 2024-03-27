@@ -20,10 +20,13 @@ interface OperationCardProps {
 }
 
 const OperationCard: React.FC<OperationCardProps> = ({ operationName, onClick }) => (
-    <div className="p-4 transition duration-300 transform bg-white shadow-md cursor-pointer w-44 rounded-xl hover:shadow-lg hover:scale-105" onClick={onClick}>
-        <p className="font-normal text-center text-black ">{operationName}</p>
+    <div className="p-4 transition duration-300 transform shadow-xl cursor-pointer bg-gradient-to-br from-gray-500 to-gray-100 w-44 rounded-xl hover:shadow-2xl hover:scale-105" onClick={onClick}>
+        <div className=" rounded-xl">
+            <p className="font-normal text-center text-black">{operationName}</p>
+        </div>
     </div>
 );
+
 
 const App = () => {
     const [selectedOperation, setSelectedOperation] = React.useState('');
