@@ -4,13 +4,13 @@ import { Icon } from '@iconify/react';
 const generateRandomNumbers = (numberOfDigits: number) => {
     let number;
     if (numberOfDigits === 1) {
-        number = Math.floor(Math.random() * 9) + 1; // Generate a single-digit number
+        number = Math.floor(Math.random() * 9) + 1;
     } else {
-        const min = Math.pow(10, numberOfDigits - 1); // Minimum value for the selected number of digits
-        const max = Math.pow(10, numberOfDigits) - 1; // Maximum value for the selected number of digits
-        number = Math.floor(Math.random() * (max - min + 1)) + min; // Generate a number within the specified range
+        const min = Math.pow(10, numberOfDigits - 1);
+        const max = Math.pow(10, numberOfDigits) - 1;
+        number = Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    return `${number}`; // Generate the square question
+    return `${number}`;
 }
 
 
@@ -42,7 +42,6 @@ const Square = () => {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
 
-            // Calculate the number of digits directly from the numberOfDigits state
             for (let i = 0; i < numberOfRows; i++) {
                 let question;
                 do {
@@ -100,7 +99,15 @@ const Square = () => {
                             id="rowsInput"
                             type="number"
                             value={numberOfRows}
-                            onChange={(e) => setNumberOfRows(parseInt(e.target.value))}
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (value !== 0) {
+                                    setNumberOfRows(value);
+                                }
+                                else {
+                                    alert("Please enter a positive number");
+                                }
+                            }}
                             min="1"
                             max="10"
                             className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
@@ -126,11 +133,16 @@ const Square = () => {
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
                     <div>
-                        <div>
-                            <p className='font-medium text-center text-white text-9xl'>
-                                {questions[currentQuestionIndex]}²
-                            </p>
-                        </div>
+                        {
+                            isStarted ?
+                                <div>
+                                    <p className='font-medium text-center text-white text-9xl'>
+                                        {questions[currentQuestionIndex]}²
+                                    </p>
+                                </div> : <p className='font-medium text-center text-white text-9xl'>
+                                    0
+                                </p>
+                        }
                     </div>
                 )}
                 {currentQuestionIndex === numberOfRows && (

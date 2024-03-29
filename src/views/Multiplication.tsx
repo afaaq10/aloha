@@ -103,9 +103,18 @@ const Multiplication = () => {
                             id="rowsInput"
                             type="number"
                             value={numberOfRows}
-                            onChange={(e) => setNumberOfRows(parseInt(e.target.value))}
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (value !== 0) {
+                                    setNumberOfRows(value);
+                                }
+                                else {
+                                    alert("Please enter a positive number");
+                                }
+                            }}
                             min="1"
                             max="10"
+                            pattern="[1-9][0-9]*"
                             className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
