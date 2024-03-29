@@ -26,6 +26,7 @@ const Multiplication = () => {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [showStartButton, setShowStartButton] = React.useState<boolean>(true);
     const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
+    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows); // Initialize to default value
 
     React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
@@ -38,7 +39,7 @@ const Multiplication = () => {
     }, [currentQuestionIndex, isStarted, speed, numberOfRows]);
 
     React.useEffect(() => {
-        if (isStarted && currentQuestionIndex < numberOfRows) {
+        if (isStarted && currentQuestionIndex === 0 && numberOfRows > 0) {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
 
@@ -58,8 +59,10 @@ const Multiplication = () => {
 
             setQuestions(newQuestions);
             setAnswers(newAnswers);
+            setCurrentQuestionIndex(0);
         }
     }, [isStarted, currentQuestionIndex, numberOfRows, numberOfDigits]);
+
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -70,10 +73,29 @@ const Multiplication = () => {
         setIsStarted(true);
         setShowStartButton(false);
         setShowAnswerButton(false);
+        setNumberOfRows(latestNumberOfRows); // Set number of rows to the latest selected value
     };
 
     const handleShowAnswers = () => {
         setShowModal(true);
+    };
+
+    const handleStartAgain = () => {
+        setCurrentQuestionIndex(0);
+        setIsStarted(true);
+        setShowStartButton(false);
+        setShowAnswerButton(false);
+        setNumberOfRows(latestNumberOfRows); // Ensure that the number of rows is set before starting again
+    };
+
+    const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if (value !== 0) {
+            setLatestNumberOfRows(value); // Update the latest number of rows whenever the input changes
+            setNumberOfRows(value); // Update the number of rows directly from the input
+        } else {
+            alert("Please enter a positive number");
+        }
     };
 
     return (
@@ -82,60 +104,46 @@ const Multiplication = () => {
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
-                        <input
-                            id="speedInput"
-                            type="number"
-                            value={speed}
-                            onChange={(e) => setSpeed(parseInt(e.target.value))}
-                            min="100"
-                            max="5000"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
-                        <input
-                            id="rowsInput"
-                            type="number"
-                            value={numberOfRows}
-                            onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (value !== 0) {
-                                    setNumberOfRows(value);
-                                }
-                                else {
-                                    alert("Please enter a positive number");
-                                }
-                            }}
-                            min="1"
-                            max="10"
-                            pattern="[1-9][0-9]*"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Select:</label>
-                        <select
-                            id="digitsInput"
-                            value={numberOfDigits}
-                            onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        >
-                            <option value={21}>2&times;1</option>
-                            <option value={31}>3&times;1</option>
-                            <option value={41}>4&times;1</option>
-                            <option value={22}>2&times;2</option>
-                            <option value={32}>3&times;2</option>
-                        </select>
-                    </div>
-                )}
+                <div className="mt-12">
+                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                    <input
+                        id="speedInput"
+                        type="number"
+                        value={speed}
+                        onChange={(e) => setSpeed(parseInt(e.target.value))}
+                        min="100"
+                        max="5000"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <div className="mt-2">
+                    <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                    <input
+                        id="rowsInput"
+                        type="number"
+                        value={numberOfRows}
+                        onChange={handleRowsChange} // Use handleRowsChange to update the number of rows
+                        min="1"
+                        max="10"
+                        pattern="[1-9][0-9]*"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <div className="mt-2">
+                    <label htmlFor="digitsInput" className="text-white">Select:</label>
+                    <select
+                        id="digitsInput"
+                        value={numberOfDigits}
+                        onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    >
+                        <option value={21}>2&times;1</option>
+                        <option value={31}>3&times;1</option>
+                        <option value={41}>4&times;1</option>
+                        <option value={22}>2&times;2</option>
+                        <option value={32}>3&times;2</option>
+                    </select>
+                </div>
             </div>
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
@@ -167,11 +175,11 @@ const Multiplication = () => {
                     </div>
                 )}
 
-                {currentQuestionIndex === numberOfRows && <p className='mt-4 font-thin text-gray-400'>OR</p>}
-                {isStarted && currentQuestionIndex === numberOfRows && (
+                {currentQuestionIndex === numberOfRows && !showModal && <p className='mt-4 font-thin text-gray-400'>OR</p>}
+                {isStarted && (
                     <div className='mt-7'>
                         {!showStartButton && (
-                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStartAgain}>
                                 Start again
                             </button>
                         )}
@@ -193,10 +201,8 @@ const Multiplication = () => {
             )}
 
         </div>
+
     );
 };
 
 export default Multiplication;
-
-
-
