@@ -137,9 +137,12 @@ const Division = () => {
                 {currentQuestionIndex < numberOfRows && (
                     <div>
                         <div>
-                            <p className='font-medium text-center text-white text-9xl'>
-                                {questions[currentQuestionIndex]?.replace('÷', '÷')}
-                            </p>
+                            {
+                                isStarted ?
+                                    <p className='font-medium text-center text-white text-9xl'>
+                                        {questions[currentQuestionIndex]?.replace('÷', '÷')}
+                                    </p> : <p className='font-medium text-center text-white text-9xl'>0</p>
+                            }
                         </div>
                     </div>
                 )}

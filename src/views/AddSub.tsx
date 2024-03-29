@@ -72,7 +72,7 @@ const AddSub = () => {
 
         setNumbers(newNumbers);
         setSum(null);
-        setShowAnswer(false); // Set showAnswer to false initially
+        setShowAnswer(false);
         setShowAnswerButton(false);
     };
 

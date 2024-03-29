@@ -141,9 +141,12 @@ const Multiplication = () => {
                 {currentQuestionIndex < numberOfRows && (
                     <div>
                         <div>
-                            <p className='font-medium text-center text-white text-9xl'>
-                                {questions[currentQuestionIndex]?.replace('*', 'x')}
-                            </p>
+                            {
+                                isStarted ?
+                                    <p className='font-medium text-center text-white text-9xl'>
+                                        {questions[currentQuestionIndex]?.replace('*', 'x')}
+                                    </p> : <p className='font-medium text-center text-white text-9xl'>0</p>
+                            }
                         </div>
                     </div>
                 )}
