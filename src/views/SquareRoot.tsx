@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * Aloha
+ *
+ * @author    Afaaq Majeed
+ * @link      https://github.com/afaaq10/aloha
+ * @copyright 2024 Afaaq Majeed
+ */
+
+import React from 'react';
 import { Icon } from '@iconify/react';
 
 const generateRandomNumbers = () => {
@@ -7,17 +15,17 @@ const generateRandomNumbers = () => {
 }
 
 const SquareRoot = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [questions, setQuestions] = useState<string[]>([]);
-    const [numberOfRows, setNumberOfRows] = useState<number>(6);
-    const [answers, setAnswers] = useState<number[]>([]);
-    const [speed, setSpeed] = useState<number>(1500);
-    const [isStarted, setIsStarted] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false);
-    const [showStartButton, setShowStartButton] = useState<boolean>(true);
-    const [showAnswerButton, setShowAnswerButton] = useState<boolean>(false);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+    const [questions, setQuestions] = React.useState<string[]>([]);
+    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
+    const [answers, setAnswers] = React.useState<number[]>([]);
+    const [speed, setSpeed] = React.useState<number>(1500);
+    const [isStarted, setIsStarted] = React.useState<boolean>(false);
+    const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [showStartButton, setShowStartButton] = React.useState<boolean>(true);
+    const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
             const timeout = setTimeout(() => {
                 setCurrentQuestionIndex(prevIndex => prevIndex + 1);
@@ -27,7 +35,7 @@ const SquareRoot = () => {
         }
     }, [currentQuestionIndex, isStarted, speed, numberOfRows]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
@@ -35,7 +43,7 @@ const SquareRoot = () => {
             for (let i = 0; i < numberOfRows; i++) {
                 const number = generateRandomNumbers();
                 newQuestions.push(`${number}`);
-                newAnswers.push(Math.sqrt(number)); // Calculate the square root for each question
+                newAnswers.push(Math.sqrt(number));
             }
 
             setQuestions(newQuestions);

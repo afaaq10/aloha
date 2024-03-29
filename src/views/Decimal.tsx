@@ -1,3 +1,11 @@
+/**
+ * Aloha
+ *
+ * @author    Afaaq Majeed
+ * @link      https://github.com/afaaq10/aloha
+ * @copyright 2024 Afaaq Majeed
+ */
+
 import React from 'react';
 import { Icon } from '@iconify/react';
 
@@ -11,8 +19,8 @@ const generateRandomNumbers = (numberOfDigits: number) => {
 
     let number;
     if (numberOfDigits === 1) {
-        const leftDigit = Math.floor(Math.random() * 9) + 1; // Random number between 1 and 9
-        const rightDigit = Math.floor(Math.random() * 10); // Random number between 0 and 9
+        const leftDigit = Math.floor(Math.random() * 9) + 1;
+        const rightDigit = Math.floor(Math.random() * 10);
         number = `${leftDigit}.${rightDigit}`;
     } else {
         const randomNumber = generateRandomNumber();
@@ -22,9 +30,6 @@ const generateRandomNumbers = (numberOfDigits: number) => {
     }
     return number;
 };
-
-
-
 
 const Decimal = () => {
     const [currentDigitIndex, setCurrentDigitIndex] = React.useState(0);

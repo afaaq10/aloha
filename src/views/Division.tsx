@@ -6,7 +6,7 @@
  * @copyright 2024 Afaaq Majeed
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Icon } from '@iconify/react';
 
 const generateRandomNumbers = (dividendDigits: number, divisorDigits: number) => {
@@ -16,16 +16,16 @@ const generateRandomNumbers = (dividendDigits: number, divisorDigits: number) =>
 }
 
 const Division = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [questions, setQuestions] = useState<string[]>([]);
-    const [numberOfDigits, setNumberOfDigits] = useState<number>(21);
-    const [numberOfRows, setNumberOfRows] = useState<number>(6);
-    const [answers, setAnswers] = useState<number[]>([]);
-    const [speed, setSpeed] = useState<number>(1500);
-    const [isStarted, setIsStarted] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+    const [questions, setQuestions] = React.useState<string[]>([]);
+    const [numberOfDigits, setNumberOfDigits] = React.useState<number>(21);
+    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
+    const [answers, setAnswers] = React.useState<number[]>([]);
+    const [speed, setSpeed] = React.useState<number>(1500);
+    const [isStarted, setIsStarted] = React.useState<boolean>(false);
+    const [showModal, setShowModal] = React.useState<boolean>(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
             const timeout = setTimeout(() => {
                 setCurrentQuestionIndex(prevIndex => prevIndex + 1);
@@ -35,7 +35,7 @@ const Division = () => {
         }
     }, [currentQuestionIndex, isStarted, speed, numberOfRows]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
@@ -132,7 +132,6 @@ const Division = () => {
                     </div>
                 )}
             </div>
-
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
                     <div>
