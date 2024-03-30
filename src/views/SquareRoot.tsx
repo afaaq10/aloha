@@ -17,7 +17,8 @@ const generateRandomNumbers = () => {
 const SquareRoot = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
     const [questions, setQuestions] = React.useState<string[]>([]);
-    const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
+    const [numberOfRows, setNumberOfRows] = React.useState<number>(2);
+    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows);
     const [answers, setAnswers] = React.useState<number[]>([]);
     const [speed, setSpeed] = React.useState<number>(1500);
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
@@ -51,6 +52,13 @@ const SquareRoot = () => {
         }
     }, [isStarted, currentQuestionIndex, numberOfRows]);
 
+    React.useEffect(() => {
+        if (!isStarted && numberOfRows !== questions.length) {
+            setQuestions([]);
+            setAnswers([]);
+        }
+    }, [isStarted, numberOfRows, questions.length]);
+
     const handleModalClose = () => {
         setShowModal(false);
     };
@@ -60,10 +68,29 @@ const SquareRoot = () => {
         setIsStarted(true);
         setShowStartButton(false);
         setShowAnswerButton(false);
+        setNumberOfRows(latestNumberOfRows);
     };
 
     const handleShowAnswers = () => {
         setShowModal(true);
+    };
+
+    const handleStartAgain = () => {
+        setCurrentQuestionIndex(0);
+        setIsStarted(true);
+        setShowStartButton(false);
+        setShowAnswerButton(false);
+        setNumberOfRows(latestNumberOfRows);
+    };
+
+    const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if (value !== 0) {
+            setLatestNumberOfRows(value);
+            // setNumberOfRows(value);
+        } else {
+            alert("Please enter a positive number");
+        }
     };
 
     return (
@@ -72,42 +99,34 @@ const SquareRoot = () => {
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
-                        <input
-                            id="speedInput"
-                            type="number"
-                            value={speed}
-                            onChange={(e) => setSpeed(parseInt(e.target.value))}
-                            min="100"
-                            max="5000"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
-                        <input
-                            id="rowsInput"
-                            type="number"
-                            value={numberOfRows}
-                            onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (value !== 0) {
-                                    setNumberOfRows(value);
-                                }
-                                else {
-                                    alert("Please enter a positive number");
-                                }
-                            }}
-                            min="1"
-                            max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
+
+                <div className="mt-12">
+                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                    <input
+                        id="speedInput"
+                        type="number"
+                        value={speed}
+                        onChange={(e) => setSpeed(parseInt(e.target.value))}
+                        min="100"
+                        max="5000"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+
+
+                <div className="mt-2">
+                    <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                    <input
+                        id="rowsInput"
+                        type="number"
+                        value={latestNumberOfRows}
+                        onChange={handleRowsChange} // Use handleRowsChange to update the number of rows
+                        min="1"
+                        max="10"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+
             </div>
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
@@ -145,7 +164,7 @@ const SquareRoot = () => {
                 {isStarted && currentQuestionIndex === numberOfRows && (
                     <div className='mt-7'>
                         {!showStartButton && (
-                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStartAgain}>
                                 Start again
                             </button>
                         )}
