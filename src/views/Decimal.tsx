@@ -41,6 +41,7 @@ const Decimal = () => {
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
     const [showAnswer, setShowAnswer] = React.useState<boolean>(false);
     const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
+    const latestNumberOfRows = React.useRef<number>(numberOfRows); // Use ref to store the latest number of rows
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
@@ -100,6 +101,21 @@ const Decimal = () => {
         setShowAnswerButton(false);
     };
 
+    const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if (value !== 0) {
+            latestNumberOfRows.current = value; // Update the latest number of rows using ref
+            setNumberOfRows(value);
+        } else {
+            alert("Please enter a positive number");
+        }
+    };
+
+    const handleStartAgain = () => {
+        setNumberOfRows(latestNumberOfRows.current); // Set the number of rows to the latest value
+        startProcess(); // Start the game again with the latest number of rows
+    };
+
     return (
         <div className='flex flex-col items-center bg-[#0f172a]'>
             <div className='absolute top-0 left-0 mt-4 ml-4'>
@@ -127,15 +143,7 @@ const Decimal = () => {
                             id="rowsInput"
                             type="number"
                             value={numberOfRows}
-                            onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (value !== 0) {
-                                    setNumberOfRows(value);
-                                }
-                                else {
-                                    alert("Please enter a positive number");
-                                }
-                            }}
+                            onChange={handleRowsChange}
                             min="1"
                             max="10"
                             className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
@@ -166,7 +174,7 @@ const Decimal = () => {
                     </div>
                     {showAnswer && sum !== null && (
                         <p className='mt-4 text-5xl font-medium text-center text-white'>
-                            <span className='text-green-400'>Answer</span> : {sum}
+                            <span className='text-green-400'>Answer</span> : {sum.toFixed(6)} {/* Limit answer to max 6 decimal places */}
                         </p>
                     )}
                 </div>
@@ -179,8 +187,8 @@ const Decimal = () => {
                 </div>
                 <div className='mt-10'>
                     {(!isStarted || sum !== null) && !showAnswerButton && (
-                        <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={startProcess}>
-                            Start
+                        <button className='w-24 px-4 py-2 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={isStarted ? handleStartAgain : startProcess}>
+                            {isStarted ? 'Restart' : 'Start'} {/* Change button text to 'Restart' if game is started */}
                         </button>
                     )}
                 </div>
