@@ -86,7 +86,7 @@ const AddSub = () => {
             <div className='absolute top-0 left-0 mt-4 ml-4'>
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
-            <div className='flex items-baseline gap-5 mt-9'>
+            <div className='flex items-baseline gap-3 mt-9'>
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-12">
                         <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
