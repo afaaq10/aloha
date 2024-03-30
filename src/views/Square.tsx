@@ -133,12 +133,12 @@ const Square = () => {
                 </div>
 
                 <div className="mt-2">
-                    <label htmlFor="digitsInput" className="text-white">Select:</label>
+                    <label htmlFor="digitsInput" className="text-white ">Select digit:</label>
                     <select
                         id="digitsInput"
                         value={numberOfDigits}
                         onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                        className="block w-full px-2 py-1 text-gray-800 bg-gray-200 rounded-md mt-7 lg:mt-1 focus:outline-none focus:ring focus:ring-indigo-200"
                     >
                         <option value={1}>Single digit</option>
                         <option value={2}>Double digit</option>
