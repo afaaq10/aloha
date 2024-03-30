@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aloha/static/css/main.208f0aa1.css",
-    "main.js": "/aloha/static/js/main.d9104c7f.js",
+    "main.css": "/aloha/static/css/main.af0b0369.css",
+    "main.js": "/aloha/static/js/main.65b2aa8b.js",
     "static/js/453.ed3810f9.chunk.js": "/aloha/static/js/453.ed3810f9.chunk.js",
     "index.html": "/aloha/index.html",
-    "main.208f0aa1.css.map": "/aloha/static/css/main.208f0aa1.css.map",
-    "main.d9104c7f.js.map": "/aloha/static/js/main.d9104c7f.js.map",
+    "main.af0b0369.css.map": "/aloha/static/css/main.af0b0369.css.map",
+    "main.65b2aa8b.js.map": "/aloha/static/js/main.65b2aa8b.js.map",
     "453.ed3810f9.chunk.js.map": "/aloha/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.208f0aa1.css",
-    "static/js/main.d9104c7f.js"
+    "static/css/main.af0b0369.css",
+    "static/js/main.65b2aa8b.js"
   ]
 }
