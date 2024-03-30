@@ -21,9 +21,12 @@ const Division = () => {
     const [numberOfDigits, setNumberOfDigits] = React.useState<number>(21);
     const [numberOfRows, setNumberOfRows] = React.useState<number>(6);
     const [answers, setAnswers] = React.useState<number[]>([]);
+    const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
+    const [showStartButton, setShowStartButton] = React.useState<boolean>(true);
     const [speed, setSpeed] = React.useState<number>(1500);
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
     const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows);
 
     React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
@@ -36,7 +39,7 @@ const Division = () => {
     }, [currentQuestionIndex, isStarted, speed, numberOfRows]);
 
     React.useEffect(() => {
-        if (isStarted && currentQuestionIndex < numberOfRows) {
+        if (isStarted && currentQuestionIndex === 0 && numberOfRows > 0) {
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
 
@@ -56,20 +59,43 @@ const Division = () => {
 
             setQuestions(newQuestions);
             setAnswers(newAnswers);
+            setCurrentQuestionIndex(0);
         }
     }, [isStarted, currentQuestionIndex, numberOfRows, numberOfDigits]);
+
 
     const handleModalClose = () => {
         setShowModal(false);
     };
 
-    const handleModalOpen = () => {
+    const handleStart = () => {
+        setCurrentQuestionIndex(0);
+        setShowAnswerButton(false);
+        setShowStartButton(false);
+        setIsStarted(true);
+        setNumberOfRows(latestNumberOfRows);
+    };
+
+    const handleShowAnswers = () => {
         setShowModal(true);
     };
 
-    const handleStart = () => {
+    const handleStartAgain = () => {
         setCurrentQuestionIndex(0);
         setIsStarted(true);
+        setShowStartButton(false);
+        setShowAnswerButton(false);
+        setNumberOfRows(latestNumberOfRows);
+    };
+
+    const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if (value !== 0) {
+            setLatestNumberOfRows(value);
+            setNumberOfRows(value);
+        } else {
+            alert("Please enter a positive number");
+        }
     };
 
     return (
@@ -78,59 +104,46 @@ const Division = () => {
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
-                        <input
-                            id="speedInput"
-                            type="number"
-                            value={speed}
-                            onChange={(e) => setSpeed(parseInt(e.target.value))}
-                            min="100"
-                            max="5000"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
-                        <input
-                            id="rowsInput"
-                            type="number"
-                            value={numberOfRows}
-                            onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (value !== 0) {
-                                    setNumberOfRows(value);
-                                }
-                                else {
-                                    alert("Please enter a positive number");
-                                }
-                            }}
-                            min="1"
-                            max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        />
-                    </div>
-                )}
-                {((!isStarted) || currentQuestionIndex === numberOfRows) && (
-                    <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Select:</label>
-                        <select
-                            id="digitsInput"
-                            value={numberOfDigits}
-                            onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-                        >
-                            <option value={21}>2&divide;1</option>
-                            <option value={31}>3&divide;1</option>
-                            <option value={41}>4&divide;1</option>
-                            <option value={22}>2&divide;2</option>
-                            <option value={32}>3&divide;2</option>
-                        </select>
-                    </div>
-                )}
+                <div className="mt-12">
+                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                    <input
+                        id="speedInput"
+                        type="number"
+                        value={speed}
+                        onChange={(e) => setSpeed(parseInt(e.target.value))}
+                        min="100"
+                        max="5000"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <div className="mt-2">
+                    <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                    <input
+                        id="rowsInput"
+                        type="number"
+                        value={numberOfRows}
+                        onChange={handleRowsChange} // Use handleRowsChange to update the number of rows
+                        min="1"
+                        max="10"
+                        pattern="[1-9][0-9]*"
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    />
+                </div>
+                <div className="mt-2">
+                    <label htmlFor="digitsInput" className="text-white">Select:</label>
+                    <select
+                        id="digitsInput"
+                        value={numberOfDigits}
+                        onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
+                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                    >
+                        <option value={21}>2&times;1</option>
+                        <option value={31}>3&times;1</option>
+                        <option value={41}>4&times;1</option>
+                        <option value={22}>2&times;2</option>
+                        <option value={32}>3&times;2</option>
+                    </select>
+                </div>
             </div>
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
@@ -147,9 +160,11 @@ const Division = () => {
                 )}
                 {currentQuestionIndex === numberOfRows && (
                     <div className='mt-10'>
-                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-300 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleModalOpen}>
-                            Show Answers
-                        </button>
+                        {!showAnswerButton && (
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-300 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleShowAnswers}>
+                                Show Answers
+                            </button>
+                        )}
                     </div>
                 )}
                 {!isStarted && currentQuestionIndex === 0 && (
@@ -159,12 +174,15 @@ const Division = () => {
                         </button>
                     </div>
                 )}
-                {currentQuestionIndex === numberOfRows && <p className='mt-4 font-thin text-gray-400'>OR</p>}
-                {isStarted && currentQuestionIndex === numberOfRows && (
+
+                {currentQuestionIndex === numberOfRows && !showModal && <p className='mt-4 font-thin text-gray-400'>OR</p>}
+                {isStarted && (
                     <div className='mt-7'>
-                        <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStart}>
-                            Start again
-                        </button>
+                        {!showStartButton && (
+                            <button className='px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 w-36 rounded-xl hover:scale-105' onClick={handleStartAgain}>
+                                Start again
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
@@ -174,14 +192,16 @@ const Division = () => {
                         <h2 className="mb-4 text-2xl font-semibold text-center">Answers</h2>
                         <div className="overflow-y-auto text-center max-h-80">
                             {answers.map((answer, index) => (
-                                <p key={index} className="p-3 text-xl">{questions[index]} = {answer?.toFixed(2)}</p>
+                                <p key={index} className="p-3 text-xl">{questions[index]} = {answer}</p>
                             ))}
                         </div>
                         <button className="block px-12 py-2 mx-auto mt-4 text-white rounded-lg bg-gradient-to-br from-gray-400 to-gray-400" onClick={handleModalClose}>Close</button>
                     </div>
                 </div>
             )}
+
         </div>
+
     );
 };
 

@@ -26,7 +26,7 @@ const Multiplication = () => {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [showStartButton, setShowStartButton] = React.useState<boolean>(true);
     const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
-    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows); // Initialize to default value
+    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows);
 
     React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
@@ -73,7 +73,7 @@ const Multiplication = () => {
         setIsStarted(true);
         setShowStartButton(false);
         setShowAnswerButton(false);
-        setNumberOfRows(latestNumberOfRows); // Set number of rows to the latest selected value
+        setNumberOfRows(latestNumberOfRows);
     };
 
     const handleShowAnswers = () => {
@@ -85,14 +85,14 @@ const Multiplication = () => {
         setIsStarted(true);
         setShowStartButton(false);
         setShowAnswerButton(false);
-        setNumberOfRows(latestNumberOfRows); // Ensure that the number of rows is set before starting again
+        setNumberOfRows(latestNumberOfRows);
     };
 
     const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value);
         if (value !== 0) {
-            setLatestNumberOfRows(value); // Update the latest number of rows whenever the input changes
-            setNumberOfRows(value); // Update the number of rows directly from the input
+            setLatestNumberOfRows(value);
+            setNumberOfRows(value);
         } else {
             alert("Please enter a positive number");
         }
