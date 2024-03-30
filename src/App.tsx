@@ -20,7 +20,7 @@ interface OperationCardProps {
 }
 
 const OperationCard: React.FC<OperationCardProps> = ({ operationName, onClick }) => (
-    <div className="p-4 transition duration-300 transform shadow-xl cursor-pointer bg-gradient-to-br from-gray-500 to-gray-100 w-44 rounded-xl hover:shadow-2xl hover:scale-105" onClick={onClick}>
+    <div className="p-3 transition duration-300 transform shadow-xl cursor-pointer w-36 bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:shadow-2xl hover:scale-105" onClick={onClick}>
         <div className=" rounded-xl">
             <p className="font-normal text-center text-black">{operationName}</p>
         </div>
@@ -49,17 +49,17 @@ const App = () => {
                 </>
             ) : (
                 <div className='flex flex-col gap-16 mt-24'>
-                    <div className="flex gap-16">
-                        <OperationCard operationName="Addition/Subtraction" onClick={() => setSelectedOperation('Addition/Subtraction')} />
+                    <div className="flex gap-10">
+                        <OperationCard operationName="Add/Subtract" onClick={() => setSelectedOperation('Addition/Subtraction')} />
                         <OperationCard operationName="Multiplication" onClick={() => setSelectedOperation('Multiplication')} />
                     </div>
 
-                    <div className="flex gap-16">
+                    <div className="flex gap-10">
                         <OperationCard operationName="Division" onClick={() => setSelectedOperation('Division')} />
                         <OperationCard operationName="Decimal" onClick={() => setSelectedOperation('Decimal')} />
                     </div>
 
-                    <div className="flex gap-16">
+                    <div className="flex gap-10">
                         <OperationCard operationName="Square" onClick={() => setSelectedOperation('Square')} />
                         <OperationCard operationName="Square Root" onClick={() => setSelectedOperation('SquareRoot')} />
                     </div>
