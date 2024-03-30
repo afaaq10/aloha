@@ -97,7 +97,7 @@ const AddSub = () => {
                             onChange={(e) => setSpeed(parseInt(e.target.value))}
                             min="100"
                             max="5000"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block w-32 px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}
@@ -119,7 +119,7 @@ const AddSub = () => {
                             }}
                             min="1"
                             max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md w-28 focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}
@@ -133,7 +133,7 @@ const AddSub = () => {
                             onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
                             min="1"
                             max="10"
-                            className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md w-28 focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}
