@@ -66,8 +66,8 @@ const App = () => {
                 </div>
             )}
 
-            <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}></div>
-            <footer className='py-4 text-sm text-white'>&copy; Afaaq Majeed</footer>
+            {/* <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}></div>
+            <footer className='py-4 text-sm text-white'>&copy; Afaaq Majeed</footer> */}
         </div>
     );
 };
