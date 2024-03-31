@@ -53,7 +53,6 @@ const AddSub = () => {
                 speechChunks.push(number.toString());
             }
 
-            // Delay the speech for a short time to ensure the component is rendered
             const timeout = setTimeout(() => {
                 speechChunks.forEach((chunk: any, index: number) => {
                     const utterance = new SpeechSynthesisUtterance(chunk);
