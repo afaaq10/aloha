@@ -8,6 +8,7 @@
 
 import React from 'react';
 import { Icon } from '@iconify/react';
+import Speech from 'react-speech';
 
 const generateRandomNumbers = (numberOfDigits: number) => {
     const min = Math.pow(10, numberOfDigits - 1);
@@ -34,13 +35,41 @@ const AddSub = () => {
             return;
         }
 
+        // if (isStarted && currentDigitIndex < numberOfRows) {
+        //     const timeout = setTimeout(() => {
+        //         setCurrentDigitIndex(prevIndex => prevIndex + 1);
+        //     }, speed);
+
+        //     return () => clearTimeout(timeout);
+        // }
         if (isStarted && currentDigitIndex < numberOfRows) {
+            const number = numbers[currentDigitIndex];
+            let speechChunks: any = [];
+
+            if (number < 0) {
+                speechChunks.push('minus');
+                speechChunks.push(Math.abs(number).toString());
+            } else {
+                speechChunks.push(number.toString());
+            }
+
+            // Delay the speech for a short time to ensure the component is rendered
             const timeout = setTimeout(() => {
-                setCurrentDigitIndex(prevIndex => prevIndex + 1);
-            }, speed);
+                speechChunks.forEach((chunk: any, index: number) => {
+                    const utterance = new SpeechSynthesisUtterance(chunk);
+                    utterance.rate = 1.5; // Adjust the rate to remove pauses
+                    utterance.onend = () => {
+                        if (index === speechChunks.length - 1) {
+                            setCurrentDigitIndex(prevIndex => prevIndex + 1);
+                        }
+                    };
+                    speechSynthesis.speak(utterance);
+                });
+            }, 1000); // Adjust the delay time as needed
 
             return () => clearTimeout(timeout);
         }
+
     }, [currentDigitIndex, isStarted, numbers, speed, numberOfRows]);
 
     const startProcess = () => {
@@ -146,9 +175,12 @@ const AddSub = () => {
                         </p>
                     </div>
                     {showAnswer && sum !== null && (
-                        <p className='mt-4 text-5xl font-medium text-center text-white'>
-                            <span className='text-green-400'>Answer</span> : {sum}
-                        </p>
+                        <div>
+                            <Speech textAsButton={true} displayText="Speak Answer" text={`The answer is ${sum}`} />
+                            <p className='mt-4 text-5xl font-medium text-center text-white'>
+                                <span className='text-green-400'>Answer</span> : {sum}
+                            </p>
+                        </div>
                     )}
                 </div>
                 <div className='mt-10'>
