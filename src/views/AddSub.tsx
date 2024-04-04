@@ -64,7 +64,7 @@ const AddSub = () => {
                     };
                     speechSynthesis.speak(utterance);
                 });
-            }, 1000); // Adjust the delay time as needed
+            }, 1000);
 
             return () => clearTimeout(timeout);
         }
