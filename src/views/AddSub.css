@@ -1,0 +1,8 @@
+.show-digit {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.text-9xl {
+    opacity: 0;
+}

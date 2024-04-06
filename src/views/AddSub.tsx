@@ -8,6 +8,7 @@
 
 import React from 'react';
 import { Icon } from '@iconify/react';
+import beepSound from './beep.mp3';
 
 const generateRandomNumbers = (numberOfDigits: number) => {
     const min = Math.pow(10, numberOfDigits - 1);
@@ -25,6 +26,14 @@ const AddSub = () => {
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
     const [showAnswer, setShowAnswer] = React.useState<boolean>(false);
     const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
+
+    const beep = new Audio(beepSound);
+    React.useEffect(() => {
+        if (isStarted && currentDigitIndex < numberOfRows) {
+            beep.play(); // Play the beep sound
+        }
+    }, [currentDigitIndex, numberOfRows, beep]);
+
 
     React.useEffect(() => {
         if (currentDigitIndex === numberOfRows) {
