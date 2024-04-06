@@ -180,7 +180,7 @@ const Decimal = () => {
                 </div>
                 <div className='mt-10'>
                     {isStarted && sum !== null && showAnswerButton && (
-                        <button className='w-32 px-4 py-3 text-black bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={handleShowAnswer}>
+                        <button className='px-4 py-3 text-black md:w-32 bg-gradient-to-br from-gray-500 to-gray-100 rounded-xl hover:scale-105' onClick={handleShowAnswer}>
                             Show Answer
                         </button>
                     )}
