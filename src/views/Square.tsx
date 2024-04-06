@@ -101,7 +101,7 @@ const Square = () => {
 
     return (
         <div className='flex flex-col items-center bg-[#0f172a]'>
-            <div className='absolute top-0 left-0 mt-4 ml-4'>
+            <div className='absolute top-0 left-0 mt-2 ml-2'>
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
