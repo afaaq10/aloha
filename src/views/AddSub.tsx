@@ -95,10 +95,10 @@ const AddSub = () => {
             <div className='absolute top-0 left-0 mt-4 ml-4'>
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
-            <div className='flex items-baseline gap-3 mt-9'>
+            <div className='flex items-baseline gap-5 mt-9'>
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                        <label htmlFor="speedInput" className="text-white">Speed (ms):</label>
                         <input
                             id="speedInput"
                             type="number"
@@ -106,13 +106,13 @@ const AddSub = () => {
                             onChange={(e) => setSpeed(parseInt(e.target.value))}
                             min="100"
                             max="5000"
-                            className="block w-32 px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block w-20 px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md md:w-36 focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                        <label htmlFor="rowsInput" className="text-white">Total Rows:</label>
                         <input
                             id="rowsInput"
                             type="number"
@@ -128,13 +128,13 @@ const AddSub = () => {
                             }}
                             min="1"
                             max="10"
-                            className="block px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md w-28 focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block w-24 px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md md:w-32 focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
+                        <label htmlFor="digitsInput" className="text-white">Total Digits:</label>
                         <input
                             id="digitsInput"
                             type="number"
@@ -142,7 +142,7 @@ const AddSub = () => {
                             onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
                             min="1"
                             max="10"
-                            className="block px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md w-28 focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="block w-24 px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md md:w-28 focus:outline-none focus:ring focus:ring-indigo-200"
                         />
                     </div>
                 )}

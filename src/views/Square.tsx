@@ -107,7 +107,7 @@ const Square = () => {
             <div className='flex items-baseline gap-5 mt-9'>
 
                 <div className="mt-12">
-                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                    <label htmlFor="speedInput" className="text-white">Speed (ms):</label>
                     <input
                         id="speedInput"
                         type="number"
@@ -120,7 +120,7 @@ const Square = () => {
                 </div>
 
                 <div className="mt-2">
-                    <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                    <label htmlFor="rowsInput" className="text-white">Total Rows:</label>
                     <input
                         id="rowsInput"
                         type="number"
@@ -133,12 +133,12 @@ const Square = () => {
                 </div>
 
                 <div className="mt-2">
-                    <label htmlFor="digitsInput" className="text-white ">Select digit:</label>
+                    <label htmlFor="digitsInput" className="ml-2 text-white">Select digit:</label>
                     <select
                         id="digitsInput"
                         value={numberOfDigits}
                         onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                        className="block w-full px-2 py-1 text-gray-800 bg-gray-200 rounded-md mt-7 lg:mt-1 focus:outline-none focus:ring focus:ring-indigo-200"
+                        className="block md:w-full px-2 md:py-1 py-[6px] mt-1 text-gray-800 bg-gray-200 rounded-md lg:mt-1 focus:outline-none focus:ring focus:ring-indigo-200"
                     >
                         <option value={1}>Single digit</option>
                         <option value={2}>Double digit</option>

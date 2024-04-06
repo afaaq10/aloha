@@ -105,7 +105,7 @@ const Multiplication = () => {
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
                 <div className="mt-12">
-                    <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                    <label htmlFor="speedInput" className="text-white">Speed (ms):</label>
                     <input
                         id="speedInput"
                         type="number"
@@ -117,7 +117,7 @@ const Multiplication = () => {
                     />
                 </div>
                 <div className="mt-2">
-                    <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                    <label htmlFor="rowsInput" className="text-white">Total Rows:</label>
                     <input
                         id="rowsInput"
                         type="number"
@@ -135,7 +135,7 @@ const Multiplication = () => {
                         id="digitsInput"
                         value={numberOfDigits}
                         onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
-                        className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                        className="block w-16 px-2 md:py-1 py-[6.3px] md:mt-1 mt-[3px] text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                     >
                         <option value={21}>2&times;1</option>
                         <option value={31}>3&times;1</option>

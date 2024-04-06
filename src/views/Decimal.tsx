@@ -124,7 +124,7 @@ const Decimal = () => {
             <div className='flex items-baseline gap-5 mt-9'>
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-12">
-                        <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
+                        <label htmlFor="speedInput" className="text-white">Speed (ms):</label>
                         <input
                             id="speedInput"
                             type="number"
@@ -138,7 +138,7 @@ const Decimal = () => {
                 )}
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-2">
-                        <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
+                        <label htmlFor="rowsInput" className="text-white">Total Rows:</label>
                         <input
                             id="rowsInput"
                             type="number"
@@ -152,7 +152,7 @@ const Decimal = () => {
                 )}
                 {((!isStarted && sum === null) || sum !== null) && (
                     <div className="mt-2">
-                        <label htmlFor="digitsInput" className="text-white">Number of Digits:</label>
+                        <label htmlFor="digitsInput" className="text-white">Total Digits:</label>
                         <input
                             id="digitsInput"
                             type="number"
