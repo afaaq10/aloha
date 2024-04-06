@@ -185,6 +185,19 @@ const SquareRoot = () => {
         setShowStartButton(false);
         setShowAnswerButton(false);
         setNumberOfRows(latestNumberOfRows);
+
+        const shuffledQuestions = shuffle(predefinedQuestions);
+        const newQuestions: string[] = [];
+        const newAnswers: number[] = [];
+
+        for (let i = 0; i < latestNumberOfRows; i++) {
+            newQuestions.push(shuffledQuestions[i].question);
+            newAnswers.push(shuffledQuestions[i].answer);
+        }
+
+        setQuestions(newQuestions);
+        setAnswers(newAnswers);
+
     };
 
     const handleRowsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,7 +245,7 @@ const SquareRoot = () => {
                     <div>
                         {isStarted ? (
                             <div>
-                                <p className='font-medium text-center text-white text-9xl'>
+                                <p className='font-medium text-center text-white md:text-9xl text-7xl'>
                                     √{questions[currentQuestionIndex]}
                                 </p>
                             </div>
