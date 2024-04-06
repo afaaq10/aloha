@@ -27,14 +27,13 @@ const OperationCard: React.FC<OperationCardProps> = ({ operationName, onClick })
     </div>
 );
 
-
 const App = () => {
     const [selectedOperation, setSelectedOperation] = React.useState('');
 
     return (
         <div className='flex flex-col items-center min-h-screen bg-[#0f172a]'>
             <div className='flex flex-col gap-2 mt-7'>
-                <p className='text-4xl font-medium text-white'>Aloha Rush</p>
+                <p className='text-4xl font-medium text-white'>Calculation Station</p>
                 <p className='text-xl text-center text-white'>by <span className='text-green-200'>Afaaq Majeed</span></p>
             </div>
 
