@@ -168,13 +168,13 @@ const Decimal = () => {
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 <div>
                     <div>
-                        <p className='font-medium text-center text-white text-9xl'>
+                        <p className='font-medium text-center text-white md:text-9xl text-7xl'>
                             {numbers[currentDigitIndex]}
                         </p>
                     </div>
                     {showAnswer && sum !== null && (
-                        <p className='mt-4 text-5xl font-medium text-center text-white'>
-                            <span className='text-green-400'>Answer</span> : {sum.toFixed(6)} {/* Limit answer to max 6 decimal places */}
+                        <p className='mt-4 text-4xl font-medium text-center text-white'>
+                            <span className='text-green-400'>Answer</span> : {sum.toFixed(4)} {/* Limit answer to max 6 decimal places */}
                         </p>
                     )}
                 </div>

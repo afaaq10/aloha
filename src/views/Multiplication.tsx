@@ -151,7 +151,7 @@ const Multiplication = () => {
                         <div>
                             {
                                 isStarted ?
-                                    <p className='font-medium text-center text-white text-9xl'>
+                                    <p className='font-medium text-center text-white text-7xl md:text-9xl'>
                                         {questions[currentQuestionIndex]?.replace('*', 'x')}
                                     </p> : <p className='font-medium text-center text-white text-9xl'>0</p>
                             }

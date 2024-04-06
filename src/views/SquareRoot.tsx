@@ -9,22 +9,117 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 
-const generateRandomNumbers = () => {
-    const number = Math.floor(Math.random() * 99) + 2;
-    return number;
-}
+const predefinedQuestions = [
+    { question: '16', answer: 4 },
+    { question: '9', answer: 3 },
+    { question: '25', answer: 5 },
+    { question: '36', answer: 6 },
+    { question: '729', answer: 27 },
+    { question: '49', answer: 7 },
+    { question: '64', answer: 8 },
+    { question: '81', answer: 9 },
+    { question: '100', answer: 10 },
+    { question: '121', answer: 11 },
+    { question: '144', answer: 12 },
+    { question: '169', answer: 13 },
+    { question: '196', answer: 14 },
+    { question: '225', answer: 15 },
+    { question: '256', answer: 16 },
+    { question: '289', answer: 17 },
+    { question: '324', answer: 18 },
+    { question: '361', answer: 19 },
+    { question: '400', answer: 20 },
+    { question: '441', answer: 21 },
+    { question: '484', answer: 22 },
+    { question: '529', answer: 23 },
+    { question: '576', answer: 24 },
+    { question: '625', answer: 25 },
+    { question: '676', answer: 26 },
+    { question: '784', answer: 28 },
+    { question: '841', answer: 29 },
+    { question: '900', answer: 30 },
+    { question: '961', answer: 31 },
+    { question: '1024', answer: 32 },
+    { question: '1089', answer: 33 },
+    { question: '1156', answer: 34 },
+    { question: '1225', answer: 35 },
+    { question: '1296', answer: 36 },
+    { question: '1369', answer: 37 },
+    { question: '1444', answer: 38 },
+    { question: '1521', answer: 39 },
+    { question: '1600', answer: 40 },
+    { question: '1681', answer: 41 },
+    { question: '1764', answer: 42 },
+    { question: '1849', answer: 43 },
+    { question: '1936', answer: 44 },
+    { question: '2025', answer: 45 },
+    { question: '2116', answer: 46 },
+    { question: '2209', answer: 47 },
+    { question: '2304', answer: 48 },
+    { question: '2401', answer: 49 },
+    { question: '2500', answer: 50 },
+    { question: '2601', answer: 51 },
+    { question: '2704', answer: 52 },
+    { question: '2809', answer: 53 },
+    { question: '2916', answer: 54 },
+    { question: '3025', answer: 55 },
+    { question: '3136', answer: 56 },
+    { question: '3249', answer: 57 },
+    { question: '3364', answer: 58 },
+    { question: '3481', answer: 59 },
+    { question: '3600', answer: 60 },
+    { question: '3721', answer: 61 },
+    { question: '3844', answer: 62 },
+    { question: '3969', answer: 63 },
+    { question: '4096', answer: 64 },
+    { question: '4225', answer: 65 },
+    { question: '4356', answer: 66 },
+    { question: '4489', answer: 67 },
+    { question: '4624', answer: 68 },
+    { question: '4761', answer: 69 },
+    { question: '4900', answer: 70 },
+    { question: '5041', answer: 71 },
+    { question: '5184', answer: 72 },
+    { question: '5329', answer: 73 },
+    { question: '5476', answer: 74 },
+    { question: '5625', answer: 75 },
+    { question: '5776', answer: 76 },
+    { question: '5929', answer: 77 },
+    { question: '6084', answer: 78 },
+    { question: '6241', answer: 79 },
+    { question: '6400', answer: 80 },
+    { question: '6561', answer: 81 },
+    { question: '6724', answer: 82 },
+    { question: '6889', answer: 83 },
+    { question: '7056', answer: 84 },
+    { question: '7225', answer: 85 },
+    { question: '7396', answer: 86 },
+    { question: '7569', answer: 87 },
+    { question: '7744', answer: 88 },
+    { question: '7921', answer: 89 },
+    { question: '8100', answer: 90 },
+    { question: '8281', answer: 91 },
+    { question: '8464', answer: 92 },
+    { question: '8649', answer: 93 },
+    { question: '8836', answer: 94 },
+    { question: '9025', answer: 95 },
+    { question: '9216', answer: 96 },
+    { question: '9409', answer: 97 },
+    { question: '9604', answer: 98 },
+    { question: '9801', answer: 99 },
+];
 
 const SquareRoot = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
     const [questions, setQuestions] = React.useState<string[]>([]);
-    const [numberOfRows, setNumberOfRows] = React.useState<number>(2);
-    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows);
     const [answers, setAnswers] = React.useState<number[]>([]);
+    const [numberOfRows, setNumberOfRows] = React.useState<number>(2);
     const [speed, setSpeed] = React.useState<number>(1500);
     const [isStarted, setIsStarted] = React.useState<boolean>(false);
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [showStartButton, setShowStartButton] = React.useState<boolean>(true);
     const [showAnswerButton, setShowAnswerButton] = React.useState<boolean>(false);
+    const [latestNumberOfRows, setLatestNumberOfRows] = React.useState<number>(numberOfRows); // Added latestNumberOfRows state
 
     React.useEffect(() => {
         if (isStarted && currentQuestionIndex < numberOfRows) {
@@ -37,27 +132,37 @@ const SquareRoot = () => {
     }, [currentQuestionIndex, isStarted, speed, numberOfRows]);
 
     React.useEffect(() => {
-        if (isStarted && currentQuestionIndex < numberOfRows) {
+        if (isStarted) {
+            const shuffledQuestions = shuffle(predefinedQuestions);
             const newQuestions: string[] = [];
             const newAnswers: number[] = [];
 
-            for (let i = 0; i < numberOfRows; i++) {
-                const number = generateRandomNumbers();
-                newQuestions.push(`${number}`);
-                newAnswers.push(Math.sqrt(number));
+            for (let i = 0; i < latestNumberOfRows; i++) {
+                newQuestions.push(shuffledQuestions[i]?.question);
+                newAnswers.push(shuffledQuestions[i]?.answer);
             }
 
             setQuestions(newQuestions);
             setAnswers(newAnswers);
         }
-    }, [isStarted, currentQuestionIndex, numberOfRows]);
+    }, [isStarted, latestNumberOfRows, predefinedQuestions]);
 
-    React.useEffect(() => {
-        if (!isStarted && numberOfRows !== questions.length) {
-            setQuestions([]);
-            setAnswers([]);
+    const shuffle = (array: any[]) => {
+        let currentIndex = array.length;
+        let temporaryValue;
+        let randomIndex;
+
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
-    }, [isStarted, numberOfRows, questions.length]);
+
+        return array;
+    };
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -68,7 +173,6 @@ const SquareRoot = () => {
         setIsStarted(true);
         setShowStartButton(false);
         setShowAnswerButton(false);
-        setNumberOfRows(latestNumberOfRows);
     };
 
     const handleShowAnswers = () => {
@@ -87,7 +191,6 @@ const SquareRoot = () => {
         const value = parseInt(e.target.value);
         if (value !== 0) {
             setLatestNumberOfRows(value);
-            // setNumberOfRows(value);
         } else {
             alert("Please enter a positive number");
         }
@@ -99,7 +202,6 @@ const SquareRoot = () => {
                 <button onClick={() => window.location.reload()} className="text-white"><Icon icon="eva:arrow-back-outline" width={40} /></button>
             </div>
             <div className='flex items-baseline gap-5 mt-9'>
-
                 <div className="mt-12">
                     <label htmlFor="speedInput" className="text-white">Speed (milliseconds):</label>
                     <input
@@ -112,35 +214,33 @@ const SquareRoot = () => {
                         className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                     />
                 </div>
-
-
                 <div className="mt-2">
                     <label htmlFor="rowsInput" className="text-white">Number of Rows:</label>
                     <input
                         id="rowsInput"
                         type="number"
-                        value={latestNumberOfRows}
-                        onChange={handleRowsChange} // Use handleRowsChange to update the number of rows
+                        value={latestNumberOfRows} // Use latestNumberOfRows instead of numberOfRows
+                        onChange={handleRowsChange}
                         min="1"
                         max="10"
                         className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                     />
                 </div>
-
             </div>
             <div className='flex flex-col items-center justify-center flex-grow' style={{ justifyContent: 'start', marginTop: 74 }}>
                 {currentQuestionIndex < numberOfRows && (
                     <div>
-                        {
-                            isStarted ?
-                                <div>
-                                    <p className='font-medium text-center text-white text-9xl'>
-                                        √{questions[currentQuestionIndex]}
-                                    </p>
-                                </div> : <p className='font-medium text-center text-white text-9xl'>
-                                    0
+                        {isStarted ? (
+                            <div>
+                                <p className='font-medium text-center text-white text-9xl'>
+                                    √{questions[currentQuestionIndex]}
                                 </p>
-                        }
+                            </div>
+                        ) : (
+                            <p className='font-medium text-center text-white text-9xl'>
+                                0
+                            </p>
+                        )}
                     </div>
                 )}
                 {currentQuestionIndex === numberOfRows && (
@@ -159,7 +259,6 @@ const SquareRoot = () => {
                         </button>
                     </div>
                 )}
-
                 {currentQuestionIndex === numberOfRows && <p className='mt-4 font-thin text-gray-400'>OR</p>}
                 {isStarted && currentQuestionIndex === numberOfRows && (
                     <div className='mt-7'>
@@ -177,14 +276,13 @@ const SquareRoot = () => {
                         <h2 className="mb-4 text-2xl font-semibold text-center">Answers</h2>
                         <div className="overflow-y-auto text-center max-h-80">
                             {answers.map((answer, index) => (
-                                <p key={index} className="p-3 text-xl">   √{questions[index]} = {answer}</p>
+                                <p key={index} className="p-3 text-xl"> √{questions[index]} = {answer}</p>
                             ))}
                         </div>
                         <button className="block px-12 py-2 mx-auto mt-4 text-white rounded-lg bg-gradient-to-br from-gray-400 to-gray-400" onClick={handleModalClose}>Close</button>
                     </div>
                 </div>
             )}
-
         </div>
     );
 };

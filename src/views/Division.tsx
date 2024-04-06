@@ -137,11 +137,11 @@ const Division = () => {
                         onChange={(e) => setNumberOfDigits(parseInt(e.target.value))}
                         className="block w-full px-2 py-1 mt-1 text-gray-800 bg-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                     >
-                        <option value={21}>2&times;1</option>
-                        <option value={31}>3&times;1</option>
-                        <option value={41}>4&times;1</option>
-                        <option value={22}>2&times;2</option>
-                        <option value={32}>3&times;2</option>
+                        <option value={21}>2&divide;1</option>
+                        <option value={31}>3&divide;1</option>
+                        <option value={41}>4&divide;1</option>
+                        <option value={22}>2&divide;2</option>
+                        <option value={32}>3&divide;2</option>
                     </select>
                 </div>
             </div>
@@ -151,7 +151,7 @@ const Division = () => {
                         <div>
                             {
                                 isStarted ?
-                                    <p className='font-medium text-center text-white text-9xl'>
+                                    <p className='font-medium text-center text-white md:text-9xl text-7xl'>
                                         {questions[currentQuestionIndex]?.replace('÷', '÷')}
                                     </p> : <p className='font-medium text-center text-white text-9xl'>0</p>
                             }
