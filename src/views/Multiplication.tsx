@@ -117,7 +117,7 @@ const Multiplication = () => {
                     />
                 </div>
                 <div className="mt-2">
-                    <label htmlFor="rowsInput" className="text-white">Total Rows:</label>
+                    <label htmlFor="rowsInput" className="text-white">Total Sums:</label>
                     <input
                         id="rowsInput"
                         type="number"
